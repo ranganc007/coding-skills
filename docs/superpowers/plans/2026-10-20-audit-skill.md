@@ -67,7 +67,7 @@ audit-skill/
 - Produces: repo root `~/audit-skill`; install path `~/.claude/skills/audit` is a symlink to `~/audit-skill/skills/audit`.
 
 - [ ] **Step 1:** `git init ~/audit-skill`; create the directories from File Structure; move the three files with `mv`.
-- [ ] **Step 2:** Write `LICENSE` (MIT, copyright holder `ranganc`, year 2026) and a one-paragraph `README.md` stub.
+- [ ] **Step 2:** Write `LICENSE` (MIT, copyright holder `ranganc007`, year 2026) and a one-paragraph `README.md` stub.
 - [ ] **Step 3:** Remove the now-empty `~/.claude/skills/audit` directory and run `ln -s ~/audit-skill/skills/audit ~/.claude/skills/audit`.
 - [ ] **Step 4:** Verify: `ls ~/.claude/skills/audit/references/source-prompt.md` succeeds and `git -C ~/audit-skill status` shows the files.
 - [ ] **Step 5:** Commit: `git add -A && git commit -m "chore: scaffold audit-skill repo"`.

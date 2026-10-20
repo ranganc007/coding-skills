@@ -21,7 +21,7 @@ See a real output in [`examples/shop-orders/`](examples/shop-orders/), produced 
 ### Install
 
 ```bash
-git clone https://github.com/<your-username>/audit-skill.git
+git clone https://github.com/ranganc007/audit-skill.git
 mkdir -p ~/.claude/skills
 ln -s "$PWD/audit-skill/skills/audit" ~/.claude/skills/audit   # or copy the folder
 ```
