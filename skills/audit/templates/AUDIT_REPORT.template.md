@@ -26,6 +26,12 @@ Date: {{date}} | Scope: {{scope}} | Commit: {{commit_or_not_a_git_repo}}
 
 **Verdict:** {{verdict_2_to_3_plain_sentences}}
 
+**Scorecard** (rules in SKILL.md; sorted by fix order, address 1 first):
+
+| Fix order | Area | Rating | Why (plain words) | Start with |
+|-----------|------|--------|-------------------|------------|
+| 1 | {{area}} | Poor / Needs work / Fair / Good | {{one_line_plain_reason}} | {{task_ids}} |
+
 **Fix these first** (at most 10):
 
 | # | Task | What could go wrong (plain words) |

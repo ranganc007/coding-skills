@@ -6,6 +6,16 @@ Date: 2026-10-20 | Scope: whole repo | Commit: not a git repo
 
 **Verdict:** This app is not safe to put online yet. Anyone can look at or cancel anyone else's orders without logging in, and the login box can be tricked with specially typed text. Separately, the Cancel button does not work at all and several screens give the user no feedback.
 
+**Scorecard** (sorted by fix order, address 1 first):
+
+| Fix order | Area | Rating | Why (plain words) | Start with |
+|-----------|------|--------|-------------------|------------|
+| 1 | Security | Poor | Anyone can see or cancel anyone's orders; login can be tricked; passwords are plain text. | SEC-001, SEC-002 |
+| 2 | Flows | Poor | The Cancel button never works and never saves; one button is connected to nothing. | TRC-001, TRC-002 |
+| 3 | Reliability & Scale | Needs work | One bad data row can crash the server; the orders list slows down as data grows. | OPT-002, OPT-001 |
+| 4 | Tests | Needs work | Nothing automatically checks that the app still works. | TST-001 |
+| 5 | Code Health | Fair | The same price code is written three times; small leftovers. | OPT-003 |
+
 **Fix these first** (at most 10):
 
 | # | Task | What could go wrong (plain words) |

@@ -71,8 +71,28 @@ A problem spanning areas is reported once under its primary area and cross-refer
 
 Fill `templates/AUDIT_REPORT.template.md` and `templates/AUDIT_TASKS.template.md` (sections in template order; delete the example comment). One task per verified finding (group only when one fix resolves several), ordered by severity/priority then dependency, each with a Fix prompt and `Status: Open`, `Claimed-by:`. Compute Parallel groups from non-overlapping "Files touched".
 
-Tone: the "Start here" section and every "In plain words" line are for a non-specialist (a vibe coder): short sentences, no jargon, say what could go wrong. "Fix these first" lists at most 10 items with task IDs.
+Tone: the "Start here" section and every "In plain words" line are for a non-specialist (a vibe coder): short sentences, no jargon, say what could go wrong. "Fix these first" lists at most 10 items with task IDs, and the Scorecard sits right under the verdict.
+
+## Scorecard (rate every area)
+
+Rate five areas from the final verified findings, never by feel. Count Critical/High as "serious"; count a Broken flow as High and a Partially verified flow as Medium. Unverified Medium/Low findings count, but note it.
+
+| Area | Findings that count |
+|------|---------------------|
+| Security | SEC- |
+| Reliability & Scale | OPT- tagged Reliability or Scale |
+| Code Health | OPT- tagged Lean |
+| Tests | TST- and OPT- tagged Tests |
+| Flows (do the buttons and entry points really work?) | TRC- |
+
+Rating rule, first match wins:
+- **Poor** (red): any Critical, or 2 or more serious findings.
+- **Needs work** (orange): exactly 1 serious finding, or 3 or more Medium.
+- **Fair** (yellow): 1 to 2 Medium, or only Low.
+- **Good** (green): nothing above Low, or no findings (say what was checked).
+
+Fix order: rank the areas 1..5 by rating (Poor first, then Needs work, Fair, Good), ties broken by number of serious findings, then Security before Flows before Reliability & Scale before Tests before Code Health. Give each area a one-line plain reason ("2 Broken flows: Cancel never works") and the task IDs to start with. Do not give numeric scores or letter grades.
 
 ## Finish
 
-Tell the user in plain words: the verdict, the top 3 to 5 items and what could go wrong, where the two files are, and any coverage gaps. Offer to start the first parallel group of tasks.
+Tell the user in plain words: the verdict; the scorecard as a table (Area | Rating | Why | Fix order | Start with), sorted by fix order; the top 3 to 5 items and what could go wrong, where the two files are, and any coverage gaps. Offer to start the first parallel group of tasks.
