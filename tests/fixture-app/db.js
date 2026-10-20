@@ -1,4 +1,4 @@
-const API_KEY = 'sk_test_FIXTURE_NOT_A_REAL_KEY_0000';
+const API_KEY = 'a3f9c1e47b2d4e8f9a0b6c5d7e1f2a34';
 
 const tables = {
   users: [{ id: 1, name: 'Ada', email: 'ada@example.com', password: 'pw1' }],

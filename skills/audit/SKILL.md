@@ -52,6 +52,8 @@ Each agent returns a status per action for ITS boundary only. Merge into one sta
 4. else Unreachable/dead UI if the inventory shows no reachable handler;
 5. else Verified end-to-end only if every boundary says verified.
 
+After merging statuses, merge duplicate TRC- findings (the same break reported by two boundaries becomes one finding, listing every boundary and action) and renumber all TRC- IDs globally, because each boundary agent numbers from TRC-001. Security flaws that agents mention (missing auth, injection) belong to the SEC- findings only; they never change an action's trace status.
+
 ## Phase 3 (fresh verifier, most capable model)
 
 Re-check every Critical/High SEC finding, High OPT finding and Broken trace, one `references/agent-verifier.md` agent each (launch together), given only `{{finding_id}}`, `{{claim}}`, `{{evidence}}`. Verdicts: **Confirmed**, **Downgraded** (new severity), **Rejected** (reason). Rejected and downgraded items go to the report appendix, not the findings. Medium/Low findings are not verified: keep them, label "Unverified (not independently re-checked)". If a Broken trace is Rejected, update its action's merged status.

@@ -17,6 +17,7 @@ You own exactly ONE boundary between two layers of the application. For every ac
 ## Shared rules (apply to everything below)
 
 - Read-only. Never modify, create or delete files in the repo. Your only output is your final reply.
+- Line numbers must come from the file as you read it. Before citing `file:line`, re-open that line and confirm the quoted code is really there. Never estimate or guess a line number; if you cannot confirm it, cite the function name instead and say so.
 - Every finding cites `file:line` AND quotes the offending code (a short snippet, a few lines at most).
 - Prefer fewer, well-supported findings over many guesses. Do not invent findings. Do not pad with generic best-practice nits.
 - No finding without a concrete failure scenario: say what actually goes wrong, for whom, and how.
@@ -55,6 +56,14 @@ Give each action exactly one of these five, verbatim:
 
 (At your boundary: "Verified end-to-end" means your boundary is correct and nothing downstream/upstream you saw contradicts it; use "Partially verified" when part could not be confirmed.)
 
+### How to choose the status (calibration)
+
+- **Broken** = the action does not do what the UI promises on its happy path: wrong method/path, mismatched fields, a call to something that does not exist, a response the caller cannot consume.
+- **Partially verified** = the happy path works but something is missing or unconfirmed: no loading/error/empty state shown to the user, a crash only in an edge case (e.g. clicked before login), or part of the chain you could not confirm.
+- **Verified end-to-end** = the chain works and the user sees the result. Security flaws (missing authentication or authorization, injection, plaintext secrets) do NOT change the status of a flow that works. Report them once as a security issue (cross-reference the SEC- ID if given, else one short note in your Coverage section) and keep the status based on whether the flow functions.
+- **Unreachable/dead UI** = only for a UI control with no handler, or a handler no control can reach. A server route or function that no UI control calls is NOT dead UI: classify it by its own server-side chain and add "no UI caller" to the reason.
+- **Not auditable from repository evidence** = the boundary or the other side is not in the repo.
+
 ## Output format (exactly this)
 
 `## Boundary: {{boundary}}`
@@ -79,4 +88,4 @@ Then one block per mismatch or break:
 - In plain words: 1-2 sentences, no jargon
 ```
 
-If a break is really a security problem (e.g. missing auth check), report it once and cross-reference the SEC- ID if given, else describe it in the TRC- block. End with `## Coverage`: what you checked and could not check. If everything at this boundary is fine, say so explicitly with what you checked.
+Number your TRC- findings from TRC-001; the orchestrator renumbers them globally. If a break is really a security problem (e.g. missing auth check), do not make it a TRC- finding; note it under Coverage so the security area owns it. End with `## Coverage`: what you checked and could not check. If everything at this boundary is fine, say so explicitly with what you checked.

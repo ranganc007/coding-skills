@@ -8,7 +8,7 @@ Paths are relative to `tests/fixture-app/`.
 |---|--------|----------|-------------|
 | 1 | SEC- | server.js:34-35 | `GET /api/orders/:id` returns any order without checking the caller owns it (IDOR). |
 | 2 | SEC- | server.js:17 | `POST /api/login` builds SQL by string concatenation of email and password (SQL injection). |
-| 3 | SEC- | db.js:1 | Hardcoded API key `sk_test_FIXTURE_NOT_A_REAL_KEY_0000` in source. |
+| 3 | SEC- | db.js:1 | Hardcoded API key (32-char hex string, `API_KEY` constant) in source. |
 | 4 | OPT- | services/orders.js:11-15 (queries at lines 12 and 15) | N+1: one items query per order and one product query per order item (tag `Scale`). |
 | 5 | OPT- | server.js:9, services/orders.js:3, public/app.js:3 | Same price-formatting logic copy-pasted in three files (tag `Lean`). |
 | 6 | OPT- | server.js:29-32 | `GET /api/orders` has no pagination or limit (tag `Scale`). |
@@ -27,7 +27,7 @@ Paths are relative to `tests/fixture-app/`.
 
 | Flow | Expected class | Chain |
 |------|----------------|-------|
-| Login | Verified end-to-end | public/index.html:8 `login-btn` -> public/app.js:8 handler -> fetch POST /api/login (public/app.js:9) -> server.js:14 route -> db.query (server.js:16) -> db.js:22 |
-| View orders | Verified end-to-end | public/index.html:9 `orders-btn` -> public/app.js:20 handler -> fetch GET /api/orders (public/app.js:21) -> server.js:29 route -> services/orders.js:8 `listOrders` -> db.js:22 |
+| Login | Verified end-to-end or Partially verified (no user-visible result is a real gap; must not be Broken) | public/index.html:8 `login-btn` -> public/app.js:8 handler -> fetch POST /api/login (public/app.js:9) -> server.js:14 route -> db.query (server.js:16) -> db.js:22 |
+| View orders | Verified end-to-end or Partially verified (crash before login is a real gap; must not be Broken) | public/index.html:9 `orders-btn` -> public/app.js:20 handler -> fetch GET /api/orders (public/app.js:21) -> server.js:29 route -> services/orders.js:8 `listOrders` -> db.js:22 |
 | Cancel order | Broken | public/app.js:28-30 -> DELETE /api/orders/:id has no matching route (server.js:40 defines POST only) |
 | Export CSV | Unreachable/dead UI | public/index.html:11 has no listener |

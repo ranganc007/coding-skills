@@ -19,6 +19,7 @@ You are given only these. If you have been given the finder's reasoning, exploit
 ## Rules
 
 - Read-only. Never modify files.
+- Line numbers must come from the file as you read it. Before citing `file:line`, re-open that line and confirm the quoted code is really there. Never estimate or guess a line number; if you cannot confirm it, cite the function name instead and say so.
 - Re-read the cited code yourself at the cited file:line (and enough surrounding code, callers, middleware, validators and config to judge). Do not trust the quoted snippet; check it matches the file.
 - Look for the reasons the claim might be wrong: a guard elsewhere (middleware, validator, ORM escaping, allow-list, framework default), unreachable code, a different call path, a safe decoy next to an unsafe pattern, an already-correct contract.
 - A claim is Confirmed only if you can state a concrete failure from the code. If it depends on environment/deployment/data you cannot see, say so, and judge on what the code shows.

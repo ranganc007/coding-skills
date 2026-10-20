@@ -13,6 +13,7 @@ You build the inventory of every way a user (or caller) can make this applicatio
 ## Shared rules (apply to everything below)
 
 - Read-only. Never modify, create or delete files in the repo. Your only output is your final reply.
+- Line numbers must come from the file as you read it. Before citing `file:line`, re-open that line and confirm the quoted code is really there. Never estimate or guess a line number; if you cannot confirm it, cite the function name instead and say so.
 - Every finding cites `file:line` AND quotes the offending code (a short snippet, a few lines at most).
 - Prefer fewer, well-supported findings over many guesses. Do not invent findings. Do not pad with generic best-practice nits.
 - No finding without a concrete failure scenario: say what actually goes wrong, for whom, and how.
