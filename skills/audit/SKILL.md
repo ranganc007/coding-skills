@@ -1,11 +1,16 @@
 ---
 name: audit
-description: Full read-only codebase audit (security, maintainability/performance, and whether every UI action or entry point really works end to end). Use on "/audit", or when asked to audit or review the whole codebase, security-check it, or find maintainability, performance or code-quality problems. Writes AUDIT_REPORT.md (plain-language top, technical detail below) and AUDIT_TASKS.md (a backlog an AI agent can execute).
+description: Audit your whole codebase for security holes, maintainability problems and broken buttons or flows, then write a plain-language report plus a task list your AI can fix. Read-only. Use on "/audit", or when asked to audit or review the whole codebase, security-check it, or find performance or code-quality problems.
+argument-hint: "[optional folder to limit the audit to]"
 ---
 
 # /audit
 
 Reviews a whole repo like a senior engineering and security team. Authoritative spec: `references/source-prompt.md`. Where it disagrees with this file, it wins.
+
+## Start by telling the user what is about to happen
+
+Before doing anything, say in 3 to 4 plain lines: this is a read-only audit; it checks security, maintainability/performance and whether every button or entry point really works end to end; several helper agents run in parallel and a fresh agent double-checks the serious findings; it writes `AUDIT_REPORT.md` (short plain-language summary on top, technical detail below) and `AUDIT_TASKS.md` (fixes you can hand to an AI agent); it changes none of your code and can take several minutes on a big repo. Then continue without waiting.
 
 ## Hard rules
 
