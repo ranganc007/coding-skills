@@ -1,0 +1,1 @@
+Sample output of `/audit` on `tests/fixture-app/` (run 1, see `tests/run-notes.md`). In this run the fixture's API key was an obvious placeholder, so no hardcoded-secret finding was raised; a later run with a realistic key raised it as SEC-005.
