@@ -13,7 +13,7 @@ Reviews a whole repo like a senior engineering and security team. Authoritative 
 - Every finding quotes code and cites file:line. No finding from tool output or a hunch alone. Fewer well-supported findings beat many guesses.
 - No padding. If an area has no findings, say so and list what was checked.
 - IDs: `SEC-`, `OPT-`, `TRC-`, `TST-`. Confidence: **Confirmed** or **Needs runtime/config verification**.
-- Use the Agent tool (not the Workflow tool unless the user asks). Set `model` explicitly on every Agent call: `sonnet` for finders and boundary agents, a more capable model only for the verifier. Launch independent agents in ONE message so they run in parallel.
+- Use the Agent tool (not the Workflow tool unless the user asks). Do not pin a model on Agent calls; let agents use the session's model (or the one the user chooses). Launch independent agents in ONE message so they run in parallel.
 
 ## Arguments
 
@@ -35,11 +35,11 @@ Read each reference file, substitute, and paste the result as the Agent prompt:
 - `{{actions}}`: the inventory rows (ID, component, file:line, trigger, handler, first call + args, auth) to check; all of them, or one feature area's.
 - `{{finding_id}}`, `{{claim}}`, `{{evidence}}`: the finding's ID; its claim with stated severity/priority/status; only its cited file:line and quoted code. Never the finder's reasoning.
 
-## Phase 1 (one message, three agents, sonnet)
+## Phase 1 (one message, three agents)
 
 `references/agent-security.md`, `references/agent-optimization.md`, `references/agent-inventory.md` (vars: repo_root, scope, phase0_summary). Inventory output feeds Phase 2. For non-UI repos it lists routes, commands, exports, jobs and webhooks instead.
 
-## Phase 2 (one message, sonnet)
+## Phase 2 (one message)
 
 One agent per boundary using `references/agent-trace-boundary.md`, each given every action, so each boundary is checked once. Skip boundaries that do not exist and state why in coverage gaps. Over about 50 actions, also split by feature area and note it.
 
@@ -54,7 +54,7 @@ Each agent returns a status per action for ITS boundary only. Merge into one sta
 
 After merging statuses, merge duplicate TRC- findings (the same break reported by two boundaries becomes one finding, listing every boundary and action) and renumber all TRC- IDs globally, because each boundary agent numbers from TRC-001. Security flaws that agents mention (missing auth, injection) belong to the SEC- findings only; they never change an action's trace status.
 
-## Phase 3 (fresh verifier, most capable model)
+## Phase 3 (fresh verifier)
 
 Re-check every Critical/High SEC finding, High OPT finding and Broken trace, one `references/agent-verifier.md` agent each (launch together), given only `{{finding_id}}`, `{{claim}}`, `{{evidence}}`. Verdicts: **Confirmed**, **Downgraded** (new severity), **Rejected** (reason). Rejected and downgraded items go to the report appendix, not the findings. Medium/Low findings are not verified: keep them, label "Unverified (not independently re-checked)". If a Broken trace is Rejected, update its action's merged status.
 

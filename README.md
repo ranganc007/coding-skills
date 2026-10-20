@@ -1,4 +1,4 @@
-# audit-skill
+# coding-skills
 
 A growing collection of [Claude Code](https://claude.com/claude-code) skills, built for people who build with AI ("vibe coders") and want their projects to stay safe and maintainable.
 
@@ -21,9 +21,9 @@ See a real output in [`examples/shop-orders/`](examples/shop-orders/), produced 
 ### Install
 
 ```bash
-git clone https://github.com/ranganc007/audit-skill.git
+git clone https://github.com/ranganc007/coding-skills.git
 mkdir -p ~/.claude/skills
-ln -s "$PWD/audit-skill/skills/audit" ~/.claude/skills/audit   # or copy the folder
+ln -s "$PWD/coding-skills/skills/audit" ~/.claude/skills/audit   # or copy the folder
 ```
 
 ### Use
