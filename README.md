@@ -7,6 +7,7 @@ A growing collection of [Claude Code](https://claude.com/claude-code) skills, bu
 Reviews a whole repo like a senior engineering and security team and writes two files in the repo root:
 
 - **`AUDIT_REPORT.md`**: a short, plain-language "Start here" (verdict + the top things to fix first), then the full technical detail: security findings, performance and maintainability findings (dead code, duplication, oversized code, N+1 queries, missing tests), a trace of every button or entry point from UI to database, positives, counts, and a coverage table.
+- A **scorecard** that rates five areas (Security, Flows, Reliability & Scale, Tests, Code Health) out of 10 with a plain reason and a fix order, computed from the verified findings by a fixed formula.
 - **`AUDIT_TASKS.md`**: one self-contained task per verified finding, each with a ready-to-paste prompt, exact files to touch, acceptance criteria, and groups of tasks that can run in parallel.
 
 How it avoids shallow or invented findings:

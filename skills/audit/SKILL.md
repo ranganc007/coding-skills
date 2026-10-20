@@ -73,9 +73,9 @@ Fill `templates/AUDIT_REPORT.template.md` and `templates/AUDIT_TASKS.template.md
 
 Tone: the "Start here" section and every "In plain words" line are for a non-specialist (a vibe coder): short sentences, no jargon, say what could go wrong. "Fix these first" lists at most 10 items with task IDs, and the Scorecard sits right under the verdict.
 
-## Scorecard (rate every area)
+## Scorecard (rate and score every area)
 
-Rate five areas from the final verified findings, never by feel. Count Critical/High as "serious"; count a Broken flow as High and a Partially verified flow as Medium. Unverified Medium/Low findings count, but note it.
+Score five areas from the final verified findings, never by feel.
 
 | Area | Findings that count |
 |------|---------------------|
@@ -85,14 +85,12 @@ Rate five areas from the final verified findings, never by feel. Count Critical/
 | Tests | TST- and OPT- tagged Tests |
 | Flows (do the buttons and entry points really work?) | TRC- |
 
-Rating rule, first match wins:
-- **Poor** (red): any Critical, or 2 or more serious findings.
-- **Needs work** (orange): exactly 1 serious finding, or 3 or more Medium.
-- **Fair** (yellow): 1 to 2 Medium, or only Low.
-- **Good** (green): nothing above Low, or no findings (say what was checked).
+Score = 10 minus points, stopping at 0, rounded half up to one decimal. Points per finding: Critical 4; High 2.5; Medium 1; Low 0.25. A Broken flow counts as High; a Partially verified flow or dead UI control counts as Medium. A TST- finding counts at its stated priority. Unverified Medium/Low findings count too (say so in the report). No findings means 10.0; say what was checked.
 
-Fix order: rank the areas 1..5 by rating (Poor first, then Needs work, Fair, Good), ties broken by number of serious findings, then Security before Flows before Reliability & Scale before Tests before Code Health. Give each area a one-line plain reason ("2 Broken flows: Cancel never works") and the task IDs to start with. Do not give numeric scores or letter grades.
+Rating, from the score: **Poor** 0 to 4.0, **Needs work** 4.1 to 7.0, **Fair** 7.1 to 9.5, **Good** above 9.5. Two overrides: any Critical finding makes the area Poor; any High (or Broken flow) caps the area at Needs work.
+
+Fix order: rank the areas 1..5 by rating (Poor first, then Needs work, Fair, Good), ties broken by number of serious findings (Critical/High/Broken), then Security before Flows before Reliability & Scale before Tests before Code Health. Give each area a one-line plain reason ("2 Broken flows: Cancel never works") and the task IDs to start with.
 
 ## Finish
 
-Tell the user in plain words: the verdict; the scorecard as a table (Area | Rating | Why | Fix order | Start with), sorted by fix order; the top 3 to 5 items and what could go wrong, where the two files are, and any coverage gaps. Offer to start the first parallel group of tasks.
+Tell the user in plain words: the verdict; the scorecard as a table (Fix order | Area | Score /10 | Rating | Why | Start with), sorted by fix order; the top 3 to 5 items and what could go wrong, where the two files are, and any coverage gaps. Offer to start the first parallel group of tasks.

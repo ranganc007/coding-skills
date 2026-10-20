@@ -8,13 +8,13 @@ Date: 2026-10-20 | Scope: whole repo | Commit: not a git repo
 
 **Scorecard** (sorted by fix order, address 1 first):
 
-| Fix order | Area | Rating | Why (plain words) | Start with |
-|-----------|------|--------|-------------------|------------|
-| 1 | Security | Poor | Anyone can see or cancel anyone's orders; login can be tricked; passwords are plain text. | SEC-001, SEC-002 |
-| 2 | Flows | Poor | The Cancel button never works and never saves; one button is connected to nothing. | TRC-001, TRC-002 |
-| 3 | Reliability & Scale | Needs work | One bad data row can crash the server; the orders list slows down as data grows. | OPT-002, OPT-001 |
-| 4 | Tests | Needs work | Nothing automatically checks that the app still works. | TST-001 |
-| 5 | Code Health | Fair | The same price code is written three times; small leftovers. | OPT-003 |
+| Fix order | Area | Score /10 | Rating | Why (plain words) | Start with |
+|-----------|------|-----------|--------|-------------------|------------|
+| 1 | Security | 2.3 | Poor | Anyone can see or cancel anyone's orders; login can be tricked; passwords are plain text. | SEC-001, SEC-002 |
+| 2 | Flows | 2.0 | Poor | The Cancel button never works and never saves; three other flows have gaps. | TRC-001, TRC-002 |
+| 3 | Reliability & Scale | 5.3 | Needs work | One bad data row can crash the server; the orders list slows down as data grows. | OPT-002, OPT-001 |
+| 4 | Tests | 7.5 | Needs work | Nothing automatically checks that the app still works. | TST-001 |
+| 5 | Code Health | 9.0 | Fair | The same price code is written three times. | OPT-003 |
 
 **Fix these first** (at most 10):
 
